@@ -166,11 +166,11 @@ def hello():
 @cross_origin(headers=["Access-Control-Allow-Origin", "http://localhost:5000"])
 @requires_auth
 def add_banks():
-    if request.method == 'POST':
-        name=request.args.get('name')
-        bankHeadAddress=request.args.get('bankHeadAddress')
-        bankUrl=request.args.get('bankUrl')
-        bankSwiftCode=request.args.get('bankSwiftCode')
+    #if request.method == 'POST':
+        name=request.form['name'] #args.get('name')
+        bankHeadAddress=request.form['bankHeadAddress'] #args.get('bankHeadAddress')
+        bankUrl=request.form['bankUrl']  #args.get('bankUrl')
+        bankSwiftCode=request.form['bankSwiftCode']  #args.get('bankSwiftCode')
         try:
             bank=Bank(
                 name=name,
