@@ -1,0 +1,35 @@
+
+version: "2.1"
+services:
+  postgres:
+    #container_name: postgres
+    restart: always
+    image: postgres:10
+    environment:
+      - POSTGRES_USER=banks
+      - POSTGRES_PASSWORD=banks
+      - POSTGRES_DB=banks
+    volumes:
+      - ./postgres-data/postgres:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+  app:
+    #container_name: app
+    restart: always
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    #environment:
+    #  - FLASK_ENV=docker
+    ports:
+      - 5000:5000
+    volumes:
+      - .:/app
+    depends_on:
+      - postgres
+    entrypoint:  ["python", "manage.py","runserver"]
+      #- /app/scripts/docker_script.sh
+
+#volumes:
+#  flask-app-db:
+#name: flask-app-db
